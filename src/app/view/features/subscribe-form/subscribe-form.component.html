@@ -1,0 +1,61 @@
+<mat-card>
+  <mat-card-content>
+    <div class='M0-header'>
+      <h2>Subscribe Form</h2>
+      <form (ngSubmit)='subscribeNow()' name='subscribeForm' [formGroup]='subscribeForm'>
+        <!-- first Name Input -->
+        <div class='M0-inp'>
+          <mat-form-field class='M0-w-80' appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input formControlName='firstName' matInput required>
+            <mat-error *ngIf='subscribeForm.get("firstName")'>
+              {{errorMessages.firstName}}
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+        <!-- last Name Input -->
+        <div class='M0-inp'>
+          <mat-form-field class='M0-w-80' appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input formControlName='last_name' matInput required>
+            <mat-error *ngIf='subscribeForm.get("last_name")'>
+              {{errorMessages.last_name}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <!-- Email Input -->
+        <div class="M0-inp">
+          <mat-form-field class='M0-w-80' appearance='outline'>
+            <mat-label>Email</mat-label>
+            <input formControlName='emailAddress' matInput required />
+            <mat-error *ngIf='subscribeForm.get("emailAddress")'>
+              {{errorMessages.emailAddress}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <!-- Date picker -->
+        <div class='M0-inp'>
+          <mat-form-field class='M0-w-80' appearance="outline">
+            <mat-label>Day Of Birth</mat-label>
+            <input matInput required formControlName='dob' [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf='subscribeForm.get("email")'>
+              {{errorMessages.dob}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <!-- Subscripe switcher -->
+        <div class='M0-inp M0-subscriped-holder M0-w-80'>
+          <mat-slide-toggle #isSubscribe formControlName='subscribed'>Subscribe</mat-slide-toggle>
+        </div>
+        <mat-error *ngIf='__subscribeService.subscribedUser == false'>
+          {{errorMessages.subscribed}}
+        </mat-error>
+        <!-- submit Button -->
+          <button [disabled]='subscribeForm.invalid || !isSubscribe.checked' class='M0-submit' mat-flat-button color='primary'>Subscribe</button>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
